@@ -9,37 +9,34 @@ import java.util.List;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "email",unique = true)
     private String email;
+    @Column(name = "password")
     private String password;
+    @Column(name = "address")
     private String address;
-    private UserRole userRole;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<Order> orders;
 
-    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
-    private List<Item>  items;
-
-    public User() {
+    public User(String name, String email, String password, String address) {
     }
 
-    public User(Integer id, String name, String email, String password, String address, UserRole userRole) {
+    public User(Long id, String name, String email, String password, String address) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.address = address;
-        this.userRole = userRole;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -75,14 +72,6 @@ public class User {
         this.address = address;
     }
 
-    public UserRole getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
-    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -91,7 +80,6 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", address='" + address + '\'' +
-                ", userRole=" + userRole +
                 '}';
     }
 }
