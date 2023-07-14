@@ -26,8 +26,9 @@ public class Item {
     private Integer stock;
     private String description;
 
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    /*@JsonIgnoreProperties(value = { "items", "otherPropertyToIgnore" })*/
+    /*@JsonIgnoreProperties(value = { "items" ,"otherPropertyToIgnore" })*/
     @JsonIgnore
     @JoinColumn(name = "seller_id")
     private User seller;
