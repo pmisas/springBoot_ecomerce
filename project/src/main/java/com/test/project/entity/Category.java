@@ -26,4 +26,8 @@ public class Category {
             inverseJoinColumns = @JoinColumn(name = "item_id")
     )
     private List<Item> items;
+
+    public Category(String name) {
+        this.name = name;
+    }
 }

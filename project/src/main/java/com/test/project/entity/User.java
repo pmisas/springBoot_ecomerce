@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 
 @Data
@@ -27,9 +30,9 @@ public class User {
 
     String address;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<Order> orders;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Order> orders = new ArrayList<>();
 
-    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
-    private List<Item> items;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "seller", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Item> items = new ArrayList<>();
 }

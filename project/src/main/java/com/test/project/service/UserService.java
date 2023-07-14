@@ -1,11 +1,14 @@
 package com.test.project.service;
 
+import com.test.project.entity.Item;
 import com.test.project.entity.User;
 import com.test.project.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -27,7 +30,7 @@ public class UserService {
 
     public String deleteUserById(Long id) {
         userRepository.deleteById(id);
-        return "product " + id + " removed!";
+        return "user " + id + " removed!";
     }
 
     public User updateUser(User user) {
