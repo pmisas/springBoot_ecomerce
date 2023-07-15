@@ -1,7 +1,5 @@
 package com.test.project.dto.order;
 
-import com.test.project.entity.Item;
-import com.test.project.entity.User;
 import lombok.Data;
 
 import java.util.List;
