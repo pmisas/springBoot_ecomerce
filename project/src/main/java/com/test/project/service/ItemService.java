@@ -1,8 +1,10 @@
 package com.test.project.service;
 
+import com.test.project.dto.item.ItemDTO;
 import com.test.project.entity.Category;
 import com.test.project.entity.Item;
 import com.test.project.entity.User;
+import com.test.project.repository.ICategoryRepository;
 import com.test.project.repository.IItemRepository;
 import com.test.project.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.cache.ICache;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +27,10 @@ public class ItemService {
     @Autowired
     IUserRepository userRepository;
 
-    public Item saveItem(Long idUser, Item item) {
+    @Autowired
+    ICategoryRepository categoryRepository;
+
+    public Item saveItem(Long idUser, ItemDTO item) {
         User user = userRepository.findById(idUser).orElseThrow(() -> new ResourceNotFoundException("no"));
         Item newItem = new Item();
         newItem.setName(item.getName());
@@ -32,10 +38,14 @@ public class ItemService {
         newItem.setPrice(item.getPrice());
         newItem.setStock(item.getStock());
         newItem.setImage(item.getImage());
+        List<Category> categories = categoryRepository.findAllById(item.getCategories_ids());
+        newItem.setCategories(categories);
 
         newItem.setSeller(user);
         user.getItems().add(newItem);
 
+        newItem.setCategories(categories);
+        itemRepository.save(newItem);
         userRepository.save(user);
         return newItem;
     }
@@ -53,14 +63,17 @@ public class ItemService {
         return "item " + id + " removed!";
     }
 
-    public Item updateItem(Item item) {
-        Item existingItem = itemRepository.findById(item.getId()).orElse(null);
+    public Item updateItem(Long id, ItemDTO item) {
+        Item existingItem = itemRepository.findById(id).orElse(null);
         existingItem.setName(item.getName());
-        existingItem.setCategories(item.getCategories());
+        /*existingItem.setCategories(item.getCategories());*/
         existingItem.setImage(item.getImage());
         existingItem.setPrice(item.getPrice());
         existingItem.setStock(item.getStock());
         existingItem.setDescription(item.getDescription());
+        List<Category> categories = categoryRepository.findAllById(item.getCategories_ids());
+        existingItem.setCategories(categories);
+
         return itemRepository.save(existingItem);
     }
 

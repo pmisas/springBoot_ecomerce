@@ -17,15 +17,21 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long productId;
-    private Integer number;
-    private String dateOrder;
-    private String name;
+    private String name; //nombre del comprador
+    private String address; //direccion del comprador
+    private Integer number;  //numero de productos comprados
+    private Integer price;  //valor de la compra
+    private String dateOrder;   //fecha de la compra
 
+    // vendedor
+    private User user;
+    /*
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    */
 
+    //items
     @ManyToMany
     @JoinTable(
             name = "order_item",

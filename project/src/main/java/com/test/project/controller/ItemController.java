@@ -1,5 +1,6 @@
 package com.test.project.controller;
 
+import com.test.project.dto.item.ItemDTO;
 import com.test.project.entity.Item;
 import com.test.project.entity.User;
 import com.test.project.service.ItemService;
@@ -17,7 +18,7 @@ public class ItemController {
     ItemService itemService;
 
     @PostMapping("/{idUser}")
-    public Item addItem(@PathVariable Long idUser, @RequestBody Item item) {
+    public Item addItem(@PathVariable Long idUser, @RequestBody ItemDTO item) {
         return itemService.saveItem(idUser, item);
     }
 
@@ -31,9 +32,9 @@ public class ItemController {
         return itemService.getItemById(id);
     }
 
-    @PutMapping
-    public Item updateItem(@RequestBody Item item) {
-        return itemService.updateItem(item);
+    @PutMapping("/{id}")
+    public Item updateItem(@PathVariable Long id,@RequestBody ItemDTO item) {
+        return itemService.updateItem(id, item);
     }
 
     @DeleteMapping("/{id}")

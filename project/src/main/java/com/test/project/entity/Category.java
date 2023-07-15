@@ -1,5 +1,6 @@
 package com.test.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,12 +20,8 @@ public class Category {
     private Long id;
     private String name;
 
-    @ManyToMany
-    @JoinTable(
-            name = "item_category",
-            joinColumns = @JoinColumn(name = "category_id"),
-            inverseJoinColumns = @JoinColumn(name = "item_id")
-    )
+    @ManyToMany(mappedBy = "categories")
+    @JsonBackReference
     private List<Item> items;
 
     public Category(String name) {
