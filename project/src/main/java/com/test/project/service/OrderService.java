@@ -35,15 +35,15 @@ public class OrderService {
         newOrder.setPrice(order.getPrice());
         newOrder.setNumber(order.getNumber());
         newOrder.setDateOrder(order.getDateOrder());
-        newOrder.setUser(user);
+        newOrder.setUserId(idSeller);
         List items = itemRepository.findAllById(order.getItems_id());
         newOrder.setItems(items);
 
         return orderRepository.save(newOrder);
     }
 
-    public List<Order> getOrder() {
-        return orderRepository.findAll();
+    public List<Order> getOrders(Long idSeller) {
+        return orderRepository.findByUserId(idSeller);
     }
 
     public Order getOrderById(Long id) {

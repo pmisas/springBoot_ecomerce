@@ -24,7 +24,8 @@ public class Order {
     private String dateOrder;   //fecha de la compra
 
     // vendedor
-    private User user;
+    @Column(name = "user_id")
+    private Long userId;
     /*
     @ManyToOne
     @JoinColumn(name = "user_id")
