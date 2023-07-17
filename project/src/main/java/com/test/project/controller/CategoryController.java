@@ -2,6 +2,7 @@ package com.test.project.controller;
 
 import com.test.project.entity.Category;
 import com.test.project.entity.User;
+import com.test.project.model.ApiResponse;
 import com.test.project.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,29 +18,40 @@ public class CategoryController {
     CategoryService categoryService;
 
     @PostMapping
-    public Category addCategory(@RequestBody Category category) {
+    public ApiResponse addCategory(@RequestBody Category category) {
 
-        return categoryService.saveCategory(category);
+        Category data = categoryService.saveCategory(category);
+        ApiResponse response = new ApiResponse(data);
+        return response;
     }
 
     @GetMapping
-    public List<Category> getCategory() {
-        return this.categoryService.getCategory();
+    public ApiResponse getCategory() {
+
+        List<Category> data = this.categoryService.getCategory();
+        ApiResponse response = new ApiResponse(data);
+        return response;
     }
 
     @GetMapping("/{id}")
-    public Category getCategoryById(@PathVariable Long id) {
-        return categoryService.getCategoryById(id);
+    public ApiResponse getCategoryById(@PathVariable Long id) {
+        Category data = categoryService.getCategoryById(id);
+        ApiResponse response = new ApiResponse(data);
+        return response;
     }
 
     @PutMapping
-    public Category updateCategoryAddress(@RequestBody Category category) {
-        return categoryService.updateCategory(category);
+    public ApiResponse updateCategoryAddress(@RequestBody Category category) {
+        Category data = categoryService.updateCategory(category);
+        ApiResponse response = new ApiResponse(data);
+        return response;
     }
 
     @DeleteMapping("/{id}")
-    public String deleteCategoryById(@PathVariable Long id) {
-        return categoryService.deleteCategoryById(id);
+    public ApiResponse deleteCategoryById(@PathVariable Long id) {
+        String data =  categoryService.deleteCategoryById(id);
+        ApiResponse response = new ApiResponse(data);
+        return response;
     }
 
 }

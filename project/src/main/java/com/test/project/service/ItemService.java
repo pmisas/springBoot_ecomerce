@@ -4,6 +4,7 @@ import com.test.project.dto.item.ItemDTO;
 import com.test.project.entity.Category;
 import com.test.project.entity.Item;
 import com.test.project.entity.User;
+import com.test.project.http_errors.NotFoundException;
 import com.test.project.repository.ICategoryRepository;
 import com.test.project.repository.IItemRepository;
 import com.test.project.repository.IUserRepository;
@@ -31,7 +32,7 @@ public class ItemService {
     ICategoryRepository categoryRepository;
 
     public Item saveItem(Long idUser, ItemDTO item) {
-        User user = userRepository.findById(idUser).orElseThrow(() -> new ResourceNotFoundException("no"));
+        User user = userRepository.findById(idUser).orElseThrow(() -> new NotFoundException("Item not found with ID: " + idUser));
         Item newItem = new Item();
         newItem.setName(item.getName());
         newItem.setDescription(item.getDescription());
@@ -59,12 +60,17 @@ public class ItemService {
     }
 
     public String deleteItemById(Long id) {
-        itemRepository.deleteById(id);
-        return "item " + id + " removed!";
+        Optional<Item> optionalItem = itemRepository.findById(id);
+        if (optionalItem.isPresent()) {
+            itemRepository.deleteById(id);
+            return "Item " + id + " removed!";
+        } else {
+            throw new NotFoundException("Item not found with ID: " + id);
+        }
     }
 
     public Item updateItem(Long id, ItemDTO item) {
-        Item existingItem = itemRepository.findById(id).orElse(null);
+        Item existingItem = itemRepository.findById(id).orElseThrow(()-> new NotFoundException("Item not found with ID: " + id));
         existingItem.setName(item.getName());
         /*existingItem.setCategories(item.getCategories());*/
         existingItem.setImage(item.getImage());

@@ -2,6 +2,9 @@ package com.test.project.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,9 +24,17 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     Long id;
+    @NotEmpty
+    @Size(min = 5, max=30)
     String name;
+    @NotEmpty
+    @Email
     String email;
+    @NotEmpty
+    @Size(min = 3, max=8)
     String password;
+    @NotEmpty
+    @Size(min = 8, max=20)
     String address;
 /*
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user",cascade = CascadeType.ALL)

@@ -6,6 +6,7 @@ import com.test.project.entity.Category;
 import com.test.project.entity.Item;
 import com.test.project.entity.Order;
 import com.test.project.entity.User;
+import com.test.project.http_errors.NotFoundException;
 import com.test.project.repository.IItemRepository;
 import com.test.project.repository.IOrderRepository;
 import com.test.project.repository.IUserRepository;
@@ -14,6 +15,7 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -28,7 +30,7 @@ public class OrderService {
     IOrderRepository orderRepository;
 
     public Order saveOrder(Long idSeller, OrderDTO order) {
-        User user = userRepository.findById(idSeller).orElseThrow(() -> new ResourceNotFoundException("no"));
+        User user = userRepository.findById(idSeller).orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + idSeller));
         Order newOrder = new Order();
         newOrder.setName(order.getName());
         newOrder.setAddress(order.getAddress());
@@ -47,12 +49,17 @@ public class OrderService {
     }
 
     public Order getOrderById(Long id) {
-        return orderRepository.findById(id).orElse(null);
+        return orderRepository.findById(id).orElseThrow(()-> new NotFoundException("User not found with ID: " + id));
     }
 
     public String deleteOrderById(Long id) {
-        orderRepository.deleteById(id);
-        return "order " + id + " removed!";
+        Optional<Order> optionalOrder = orderRepository.findById(id);
+        if (optionalOrder.isPresent()) {
+            userRepository.deleteById(id);
+            return "Order " + id + " removed!";
+        } else {
+            throw new NotFoundException("Order not found with ID: " + id);
+        }
     }
 
     public void updateOrder(Long id, OrderDTO order) {
