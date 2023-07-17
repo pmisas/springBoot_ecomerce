@@ -24,16 +24,12 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     Long id;
-    @NotEmpty
     @Size(min = 5, max=30)
     String name;
-    @NotEmpty
     @Email
     String email;
-    @NotEmpty
     @Size(min = 3, max=8)
     String password;
-    @NotEmpty
     @Size(min = 8, max=20)
     String address;
 /*

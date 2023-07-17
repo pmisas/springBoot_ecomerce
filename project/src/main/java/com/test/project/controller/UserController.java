@@ -19,7 +19,10 @@ public class UserController {
     public ApiResponse addUser(@RequestBody User user) {
 
         User data = userService.saveUser(user);
-        ApiResponse response = new ApiResponse(data);
+        ApiResponse response = new ApiResponse();
+        response.setError(false);
+        response.setMessage("");
+        response.setData(data);
         return response;
     }
 
@@ -27,7 +30,10 @@ public class UserController {
     public ApiResponse getUsers() {
 
         List<User> data = this.userService.getUsers();
-        ApiResponse response = new ApiResponse(data);
+        ApiResponse response = new ApiResponse();
+        response.setError(false);
+        response.setMessage("");
+        response.setData(data);
         return response;
     }
 
@@ -35,7 +41,10 @@ public class UserController {
     public ApiResponse getUserById(@PathVariable Long id) {
 
         User data = userService.getUserById(id);
-        ApiResponse response = new ApiResponse(data);
+        ApiResponse response = new ApiResponse();
+        response.setError(true);
+        response.setMessage("Ha ocurrido un error");
+        response.setData(null);
         return response;
     }
 
@@ -43,7 +52,10 @@ public class UserController {
     public ApiResponse updateUserAddress(@RequestBody User user) {
 
         User data = userService.updateUser(user);
-        ApiResponse response = new ApiResponse(data);
+        ApiResponse response = new ApiResponse();
+        response.setError(false);
+        response.setMessage("");
+        response.setData(data);
         return response;
     }
 
@@ -51,7 +63,10 @@ public class UserController {
     public ApiResponse deleteUserById(@PathVariable Long id) {
 
         String data = userService.deleteUserById(id);
-        ApiResponse response = new ApiResponse(data);
+        ApiResponse response = new ApiResponse();
+        response.setError(false);
+        response.setMessage("");
+        response.setData(data);
         return response;
     }
 

@@ -21,14 +21,20 @@ public class ItemController {
     @PostMapping("/{idUser}")
     public ApiResponse addItem(@PathVariable Long idUser, @RequestBody ItemDTO item) {
         Item data = itemService.saveItem(idUser, item);
-        ApiResponse response = new ApiResponse(data);
+        ApiResponse response = new ApiResponse();
+        response.setError(false);
+        response.setMessage("");
+        response.setData(data);
         return response;
     }
 
     @GetMapping
     public ApiResponse getItems() {
         List<Item> data = itemService.getItems();
-        ApiResponse response = new ApiResponse(data);
+        ApiResponse response = new ApiResponse();
+        response.setError(false);
+        response.setMessage("");
+        response.setData(data);
         return response;
     }
 
@@ -36,21 +42,30 @@ public class ItemController {
     public ApiResponse getItemById(@PathVariable Long id) {
 
         Item data = itemService.getItemById(id);
-        ApiResponse response = new ApiResponse(data);
+        ApiResponse response = new ApiResponse();
+        response.setError(false);
+        response.setMessage("");
+        response.setData(data);
         return response;
     }
 
     @PutMapping("/{id}")
     public ApiResponse updateItem(@PathVariable Long id,@RequestBody ItemDTO item) {
         Item data = itemService.updateItem(id, item);
-        ApiResponse response = new ApiResponse(data);
+        ApiResponse response = new ApiResponse();
+        response.setError(false);
+        response.setMessage("");
+        response.setData(data);
         return response;
     }
 
     @DeleteMapping("/{id}")
     public ApiResponse deleteItemById(@PathVariable Long id) {
         String data = itemService.deleteItemById(id);
-        ApiResponse response = new ApiResponse(data);
+        ApiResponse response = new ApiResponse();
+        response.setError(false);
+        response.setMessage("");
+        response.setData(data);
         return response;
     }
 

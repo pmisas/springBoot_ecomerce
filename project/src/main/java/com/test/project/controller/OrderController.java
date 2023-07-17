@@ -19,21 +19,30 @@ public class OrderController {
     @PostMapping("/{idSeller}")
     public ApiResponse addOrder(@PathVariable Long idSeller, @RequestBody OrderDTO order) {
         Order data = orderService.saveOrder(idSeller, order);
-        ApiResponse response = new ApiResponse(data);
+        ApiResponse response = new ApiResponse();
+        response.setError(false);
+        response.setMessage("");
+        response.setData(data);
         return response;
     }
 
     @GetMapping("/{idSeller}/seller")
     public ApiResponse getOrders(@PathVariable Long idSeller) {
         List<Order> data = orderService.getOrders(idSeller);
-        ApiResponse response = new ApiResponse(data);
+        ApiResponse response = new ApiResponse();
+        response.setError(false);
+        response.setMessage("");
+        response.setData(data);
         return response;
     }
 
     @GetMapping("/{id}")
     public ApiResponse getOrderById(@PathVariable Long id) {
         Order data = orderService.getOrderById(id);
-        ApiResponse response = new ApiResponse(data);
+        ApiResponse response = new ApiResponse();
+        response.setError(false);
+        response.setMessage("");
+        response.setData(data);
         return response;
     }
 
@@ -43,8 +52,14 @@ public class OrderController {
     }
 
     @DeleteMapping("/{id}")
-    public String deleteOrderById(@PathVariable Long id) {
-        return orderService.deleteOrderById(id);
+    public ApiResponse deleteOrderById(@PathVariable Long id) {
+
+        String data = orderService.deleteOrderById(id);
+        ApiResponse response = new ApiResponse();
+        response.setError(false);
+        response.setMessage("");
+        response.setData(data);
+        return response;
     }
 
 }
