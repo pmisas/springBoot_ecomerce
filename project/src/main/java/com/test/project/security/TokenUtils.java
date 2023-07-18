@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class tokenUtils {
+public class TokenUtils {
     private final static String ACCESS_TOKEN_SECRET = "1234qWe098pOi";
     private final static Long ACCESS_TOKEN_VALIDITY_SECONDS = 86_400L; //1dia
 

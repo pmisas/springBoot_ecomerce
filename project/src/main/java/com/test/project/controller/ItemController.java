@@ -5,6 +5,7 @@ import com.test.project.entity.Item;
 import com.test.project.entity.User;
 import com.test.project.model.ApiResponse;
 import com.test.project.service.ItemService;
+import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,7 @@ public class ItemController {
     }
 
     @GetMapping
+    @PermitAll
     public ApiResponse getItems() {
         List<Item> data = itemService.getItems();
         ApiResponse response = new ApiResponse();
