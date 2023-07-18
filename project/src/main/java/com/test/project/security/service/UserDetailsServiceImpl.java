@@ -1,7 +1,7 @@
-package com.test.project.security;
+package com.test.project.security.service;
 
-import com.test.project.entity.User;
-import com.test.project.repository.IUserRepository;
+import com.test.project.security.entity.MainUser;
+import com.test.project.security.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,17 +9,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDetailServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    IUserRepository userRepository;
-
+    UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-         User user = userRepository
-                .findByEmail(email)
-                .orElseThrow(()-> new UsernameNotFoundException("User not found with email: " + email));
-         return new UserDetailsImpl(user);
+        User user = userService.getByEmail(email).get();
+        return MainUser.build(user);
     }
 }

@@ -1,9 +1,10 @@
-package com.test.project.service;
+package com.test.project.security.service;
 
-import com.test.project.entity.User;
+import com.test.project.security.entity.User;
 import com.test.project.http_errors.BadRequestException;
 import com.test.project.http_errors.NotFoundException;
-import com.test.project.repository.IUserRepository;
+import com.test.project.security.repository.IUserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +12,27 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class UserService {
 
     @Autowired
     private IUserRepository userRepository;
 
+
+    public Optional<User> getByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    public boolean existByEmail(String email) {
+        return userRepository.existByEmail(email);
+    }
+
+    public void save(User user) {
+        userRepository.save(user);
+    }
+
+
+    /*
     public User saveUser(User user) {
         User copyUser = userRepository.findByEmail(user.getEmail()).orElse(null);
         if(copyUser != null){
@@ -53,5 +70,6 @@ public class UserService {
         existingUser.setAddress(user.getAddress());
         return userRepository.save(existingUser);
     }
+     */
 
 }

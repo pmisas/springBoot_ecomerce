@@ -1,11 +1,9 @@
 package com.test.project.controller;
 
 import com.test.project.entity.Category;
-import com.test.project.entity.User;
 import com.test.project.model.ApiResponse;
 import com.test.project.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

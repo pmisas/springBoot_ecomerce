@@ -1,8 +1,8 @@
-package com.test.project.controller;
+package com.test.project.security.controller;
 
-import com.test.project.entity.User;
+import com.test.project.security.entity.User;
 import com.test.project.model.ApiResponse;
-import com.test.project.service.UserService;
+import com.test.project.security.service.UserService;
 import jakarta.annotation.security.PermitAll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

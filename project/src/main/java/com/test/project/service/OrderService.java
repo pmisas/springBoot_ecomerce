@@ -1,15 +1,13 @@
 package com.test.project.service;
 
-import com.test.project.dto.item.ItemDTO;
 import com.test.project.dto.order.OrderDTO;
-import com.test.project.entity.Category;
-import com.test.project.entity.Item;
 import com.test.project.entity.Order;
-import com.test.project.entity.User;
+import com.test.project.security.entity.User;
 import com.test.project.http_errors.NotFoundException;
 import com.test.project.repository.IItemRepository;
 import com.test.project.repository.IOrderRepository;
-import com.test.project.repository.IUserRepository;
+import com.test.project.security.repository.IUserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
@@ -18,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class OrderService {
 
     @Autowired
