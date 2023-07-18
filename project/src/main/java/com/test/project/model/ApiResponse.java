@@ -1,6 +1,6 @@
 package com.test.project.model;
 
-public class ApiResponse {
+public class ApiResponse<T> {
     private boolean error;
     private String message;
     private Object data;

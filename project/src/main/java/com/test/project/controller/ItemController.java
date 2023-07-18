@@ -50,7 +50,7 @@ public class ItemController {
     }
 
     @PutMapping("/{id}")
-    public ApiResponse updateItem(@PathVariable Long id,@RequestBody ItemDTO item) {
+    public ApiResponse updateItem(@PathVariable Long id, @RequestBody ItemDTO item) {
         Item data = itemService.updateItem(id, item);
         ApiResponse response = new ApiResponse();
         response.setError(false);

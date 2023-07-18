@@ -1,5 +1,6 @@
 package com.test.project.security.dto;
 
+import com.test.project.security.entity.Rol;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -22,5 +23,5 @@ public class UserCreateDTO {
     @NotBlank
     @Size(min = 8, max=20)
     String address;
-    Set<String> roles = new HashSet<>();
+    Set<Rol> roles = new HashSet<>();
 }

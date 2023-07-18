@@ -49,26 +49,6 @@ public class MainSecurity {
         return http.build();
     }
 
-    /*
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, AuthenticationManager authManager) throws Exception {
-
-        return http.cors().and().csrf().disable()
-                .authorizeRequests()
-                .requestMatchers("/auth/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
-                .build();
-    }
-
-     */
-
     @Bean
     public JwtTokenFilter jwtTokenFilter() {
         return new JwtTokenFilter();

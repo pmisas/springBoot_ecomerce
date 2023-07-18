@@ -1,6 +1,6 @@
 package com.test.project.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.test.project.entity.Category;
 import com.test.project.security.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,13 +26,16 @@ public class Item {
     private Integer price;
     private Integer stock;
     private String description;
+    private User seller;
 
-
+/*
     @ManyToOne
     @JsonIgnoreProperties("items")
     @JoinColumn(name = "seller_id")
-    private User seller;
+    private User user;
 
+
+ */
     /*
     @ManyToMany(mappedBy = "items")
     private List<Order> orders = new ArrayList<>();

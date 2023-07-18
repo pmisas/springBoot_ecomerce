@@ -1,6 +1,5 @@
 package com.test.project.security.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.test.project.entity.Item;
 import jakarta.validation.constraints.*;

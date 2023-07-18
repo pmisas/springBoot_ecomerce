@@ -1,14 +1,11 @@
 package com.test.project.security.service;
 
 import com.test.project.security.entity.User;
-import com.test.project.http_errors.BadRequestException;
-import com.test.project.http_errors.NotFoundException;
 import com.test.project.security.repository.IUserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
