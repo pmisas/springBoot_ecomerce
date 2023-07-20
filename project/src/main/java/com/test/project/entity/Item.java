@@ -1,7 +1,8 @@
 package com.test.project.entity;
 
-import com.test.project.entity.Category;
-import com.test.project.security.entity.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,16 +27,13 @@ public class Item {
     private Integer price;
     private Integer stock;
     private String description;
-    private User seller;
 
-/*
+
     @ManyToOne
     @JsonIgnoreProperties("items")
     @JoinColumn(name = "seller_id")
-    private User user;
+    private User seller;
 
-
- */
     /*
     @ManyToMany(mappedBy = "items")
     private List<Order> orders = new ArrayList<>();

@@ -1,15 +1,15 @@
 package com.test.project.service;
 
 import com.test.project.entity.Category;
+import com.test.project.entity.Item;
 import com.test.project.repository.ICategoryRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
-@Transactional
 public class CategoryService {
 
     @Autowired

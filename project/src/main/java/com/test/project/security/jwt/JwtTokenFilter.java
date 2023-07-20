@@ -1,9 +1,6 @@
 package com.test.project.security.jwt;
 
-import com.test.project.security.entity.MainUser;
 import com.test.project.security.service.UserDetailsServiceImpl;
-import io.jsonwebtoken.Jwts;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,11 +19,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-
 import java.io.IOException;
-import java.util.Date;
 
-//se ejecuta por peticion mira si el token es valido permite acceso al recurso
+@Component
 public class JwtTokenFilter extends OncePerRequestFilter {
 
     private final static Logger logger = LoggerFactory.getLogger(JwtTokenFilter.class);
@@ -37,15 +32,10 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
-    /*
-    * Por cada peticion que se haga se optiene el usuario se mira si es valido y se optienen
-    * los permisos para saber si puede acceder a un recurso
-    * */
-
     @Override
-    protected void doFilterInternal(HttpServletRequest req,
-                                    HttpServletResponse res,
+    protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res,
                                     FilterChain filterChain) throws ServletException, IOException {
+
         try {
             String token = getToken(req);
             if(token != null && jwtProvider.validateToken(token)) {

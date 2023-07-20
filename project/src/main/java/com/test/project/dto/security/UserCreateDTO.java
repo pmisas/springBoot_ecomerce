@@ -1,6 +1,6 @@
-package com.test.project.security.dto;
+package com.test.project.dto.security;
 
-import com.test.project.security.entity.Rol;
+import com.test.project.entity.Rol;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

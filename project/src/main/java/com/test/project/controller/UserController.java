@@ -1,26 +1,23 @@
 package com.test.project.controller;
 
-import com.test.project.dto.item.ItemDTO;
-import com.test.project.entity.Item;
 import com.test.project.entity.User;
 import com.test.project.model.ApiResponse;
-import com.test.project.service.ItemService;
+import com.test.project.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/items")
-public class ItemController {
+@RequestMapping("/users")
+public class UserController {
 
     @Autowired
-    ItemService itemService;
+    private UserService userService;
 
-    @PostMapping("/{idUser}")
-    public ApiResponse addItem(@PathVariable Long idUser, @RequestBody ItemDTO item) {
-        Item data = itemService.saveItem(idUser, item);
+    @PostMapping
+    public ApiResponse addUser(@RequestBody User user) {
+        User data = userService.saveUser(user);
         ApiResponse response = new ApiResponse();
         response.setError(false);
         response.setMessage("");
@@ -29,8 +26,8 @@ public class ItemController {
     }
 
     @GetMapping
-    public ApiResponse getItems() {
-        List<Item> data = itemService.getItems();
+    public ApiResponse getUsers() {
+        List<User> data = this.userService.getUsers();
         ApiResponse response = new ApiResponse();
         response.setError(false);
         response.setMessage("");
@@ -39,9 +36,8 @@ public class ItemController {
     }
 
     @GetMapping("/{id}")
-    public ApiResponse getItemById(@PathVariable Long id) {
-
-        Item data = itemService.getItemById(id);
+    public ApiResponse getUserById(@PathVariable Long id) {
+        User data = userService.getUserById(id);
         ApiResponse response = new ApiResponse();
         response.setError(false);
         response.setMessage("");
@@ -49,9 +45,9 @@ public class ItemController {
         return response;
     }
 
-    @PutMapping("/{id}")
-    public ApiResponse updateItem(@PathVariable Long id, @RequestBody ItemDTO item) {
-        Item data = itemService.updateItem(id, item);
+    @PutMapping
+    public ApiResponse updateUserAddress(@RequestBody User user) {
+        User data = userService.updateUser(user);
         ApiResponse response = new ApiResponse();
         response.setError(false);
         response.setMessage("");
@@ -60,12 +56,13 @@ public class ItemController {
     }
 
     @DeleteMapping("/{id}")
-    public ApiResponse deleteItemById(@PathVariable Long id) {
-        String data = itemService.deleteItemById(id);
+    public ApiResponse deleteUserById(@PathVariable Long id) {
+        String data = userService.deleteUserById(id);
         ApiResponse response = new ApiResponse();
         response.setError(false);
         response.setMessage("");
         response.setData(data);
         return response;
     }
+
 }

@@ -1,4 +1,4 @@
-package com.test.project.security.dto;
+package com.test.project.dto.security;
 
 import org.springframework.security.core.GrantedAuthority;
 

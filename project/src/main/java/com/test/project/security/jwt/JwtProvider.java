@@ -2,7 +2,7 @@ package com.test.project.security.jwt;
 
 //Crea y valida token
 
-import com.test.project.security.entity.MainUser;
+import com.test.project.entity.MainUser;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,6 @@ import java.util.Date;
 
 @Component
 public class JwtProvider {
-
 
     private final static Logger logger = LoggerFactory.getLogger(JwtProvider.class);
 
@@ -54,5 +53,4 @@ public class JwtProvider {
         }
         return false;
     }
-
 }

@@ -1,7 +1,5 @@
 package com.test.project.security.jwt;
 
-//verifica si tiene token valido, sino unauthorized 401
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,9 +17,9 @@ public class JwtEntryPoint implements AuthenticationEntryPoint {
     private final static Logger logger = LoggerFactory.getLogger(JwtEntryPoint.class);
 
     @Override
-    public void commence(HttpServletRequest req,
-                         HttpServletResponse res,
-                         AuthenticationException e) throws IOException, ServletException {
+    public void commence(HttpServletRequest req, HttpServletResponse res,
+                         AuthenticationException authException) throws IOException, ServletException {
+
         logger.error("fail method commnece");
         res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "unauthorized");
     }

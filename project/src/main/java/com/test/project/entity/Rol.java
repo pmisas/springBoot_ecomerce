@@ -1,11 +1,18 @@
-package com.test.project.security.entity;
+package com.test.project.entity;
 
-import com.test.project.security.enums.RolName;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.test.project.enums.RolName;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+//import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.antlr.v4.runtime.misc.NotNull;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -17,7 +24,7 @@ public class Rol {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     Long id;
 
-    @NotNull
     @Enumerated(EnumType.STRING)
     RolName RolName;
+
 }

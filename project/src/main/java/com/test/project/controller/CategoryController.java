@@ -1,9 +1,10 @@
 package com.test.project.controller;
 
 import com.test.project.entity.Category;
-import com.test.project.model.ApiResponse;
+import com.test.project.entity.User;
 import com.test.project.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,55 +17,29 @@ public class CategoryController {
     CategoryService categoryService;
 
     @PostMapping
-    public ApiResponse addCategory(@RequestBody Category category) {
+    public Category addCategory(@RequestBody Category category) {
 
-        Category data = categoryService.saveCategory(category);
-        ApiResponse response = new ApiResponse();
-        response.setError(false);
-        response.setMessage("");
-        response.setData(data);
-        return response;
+        return categoryService.saveCategory(category);
     }
 
     @GetMapping
-    public ApiResponse getCategory() {
-
-        List<Category> data = this.categoryService.getCategory();
-        ApiResponse response = new ApiResponse();
-        response.setError(false);
-        response.setMessage("");
-        response.setData(data);
-        return response;
+    public List<Category> getCategory() {
+        return this.categoryService.getCategory();
     }
 
     @GetMapping("/{id}")
-    public ApiResponse getCategoryById(@PathVariable Long id) {
-        Category data = categoryService.getCategoryById(id);
-        ApiResponse response = new ApiResponse();
-        response.setError(false);
-        response.setMessage("");
-        response.setData(data);
-        return response;
+    public Category getCategoryById(@PathVariable Long id) {
+        return categoryService.getCategoryById(id);
     }
 
     @PutMapping
-    public ApiResponse updateCategoryAddress(@RequestBody Category category) {
-        Category data = categoryService.updateCategory(category);
-        ApiResponse response = new ApiResponse();
-        response.setError(false);
-        response.setMessage("");
-        response.setData(data);
-        return response;
+    public Category updateCategoryAddress(@RequestBody Category category) {
+        return categoryService.updateCategory(category);
     }
 
     @DeleteMapping("/{id}")
-    public ApiResponse deleteCategoryById(@PathVariable Long id) {
-        String data =  categoryService.deleteCategoryById(id);
-        ApiResponse response = new ApiResponse();
-        response.setError(false);
-        response.setMessage("");
-        response.setData(data);
-        return response;
+    public String deleteCategoryById(@PathVariable Long id) {
+        return categoryService.deleteCategoryById(id);
     }
 
 }

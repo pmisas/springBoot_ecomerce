@@ -1,13 +1,13 @@
-package com.test.project.security.entity;
+package com.test.project.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.test.project.entity.Item;
-import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
+import org.antlr.v4.runtime.misc.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,18 +24,11 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     Long id;
-    @NotBlank
-    @Size(min = 5, max=30)
     String name;
-    @NotBlank
-    @Email
     String email;
-    @NotBlank
-    @Size(min = 3, max=8)
     String password;
-    @NotBlank
-    @Size(min = 8, max=20)
     String address;
+
     @NotNull
     @ManyToMany
     @JoinTable(name = "user_rol",
