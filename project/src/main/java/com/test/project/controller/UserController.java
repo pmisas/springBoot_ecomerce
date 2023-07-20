@@ -1,12 +1,8 @@
 package com.test.project.controller;
 
-import com.test.project.entity.User;
-import com.test.project.model.ApiResponse;
-import com.test.project.service.UserService;
+import com.test.project.security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -15,6 +11,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /*
     @PostMapping
     public ApiResponse addUser(@RequestBody User user) {
         User data = userService.saveUser(user);
@@ -64,5 +61,7 @@ public class UserController {
         response.setData(data);
         return response;
     }
+
+     */
 
 }

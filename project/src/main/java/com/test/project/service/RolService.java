@@ -20,7 +20,6 @@ public class RolService {
     public Rol getByRolName(RolName rolName) {
         return rolRepository.findByRolName(rolName);
     }
-
      */
 
     public void save(Rol rol){

@@ -1,32 +1,14 @@
-package com.test.project.controller;
+package com.test.project.security.controller;
 
-import com.test.project.dto.security.JwtDTO;
-import com.test.project.dto.security.LoginUserDTO;
-import com.test.project.dto.security.UserCreateDTO;
-import com.test.project.entity.Rol;
-import com.test.project.entity.User;
-import com.test.project.enums.RolName;
-import com.test.project.http_errors.BadRequestException;
+import com.test.project.security.dto.LoginUserDTO;
+import com.test.project.security.dto.UserCreateDTO;
 import com.test.project.model.ApiResponse;
-import com.test.project.security.jwt.JwtProvider;
-import com.test.project.service.RolService;
-import com.test.project.service.UserService;
+//import com.test.project.security.jwt.JwtProvider;
+import com.test.project.security.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/auth")
@@ -35,6 +17,30 @@ public class AuthController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
+    @Autowired
+    UserService userService;
+
+    @PostMapping("/login")
+    public ApiResponse login(@RequestBody LoginUserDTO login) {
+
+        ApiResponse response = new ApiResponse();
+        response.setError(false);
+        response.setMessage("");
+        response.setData(userService.login(login));
+        return response;
+    }
+
+    @PostMapping("/register")
+    public ApiResponse register (@RequestBody UserCreateDTO register){
+
+        ApiResponse response = new ApiResponse();
+        response.setError(false);
+        response.setMessage("");
+        response.setData(userService.Register(register));
+        return response;
+    }
+
+    /*
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -90,21 +96,7 @@ public class AuthController {
         response.setData(jwtDTO);
         return response;
     }
+    */
 
-    @GetMapping("/public")
-    public ApiResponse<?> getMensaje() {
-        logger.info("Obteniendo el mensaje");
-
-        var auth = SecurityContextHolder.getContext().getAuthentication();
-        logger.info("Datos del Usuario: {}", auth.getPrincipal());
-        logger.info("Datos de los Roles {}", auth.getAuthorities());
-        logger.info("Esta autenticado {}", auth.isAuthenticated());
-
-        ApiResponse response = new ApiResponse();
-        response.setError(false);
-        response.setMessage("");
-        response.setData("publico");
-        return response;
-    }
 }
 

@@ -25,6 +25,6 @@ public class Rol {
     Long id;
 
     @Enumerated(EnumType.STRING)
-    RolName RolName;
+    RolName name;
 
 }
