@@ -10,7 +10,11 @@ import com.test.project.http_errors.NotFoundException;
 import com.test.project.repository.IRolRepository;
 import com.test.project.repository.IUserRepository;
 import com.test.project.model.AuthResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +25,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     @Autowired
@@ -35,21 +40,17 @@ public class UserService {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    public UserService() {
-    }
+    private final AuthenticationManager authenticationManager;
 
-    public String login(LoginUserDTO login) {
 
-        /*
-        User user = userRepository.findByEmail(login.getEmail())
-                .orElseThrow(()-> new NotFoundException("user with email"+ login.getEmail() +"not found"));
-        if(user.getPassword() != login.getPassword()) {
-            new BadRequestException("wrong password");
-        }
-        return "login from public endpoint";
+    public AuthResponse login(LoginUserDTO request) {
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+        UserDetails user=userRepository.findByEmail(request.getEmail()).orElseThrow();
+        String token=jwtService.getToken(user);
+        return AuthResponse.builder()
+                .token(token)
+                .build();
 
-         */
-        return "holi";
     }
 
     public AuthResponse Register(UserCreateDTO register) {
