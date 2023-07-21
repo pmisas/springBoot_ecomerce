@@ -4,15 +4,21 @@ import com.test.project.entity.Rol;
 import com.test.project.entity.User;
 import com.test.project.dto.LoginUserDTO;
 import com.test.project.dto.UserCreateDTO;
+import com.test.project.enums.RolName;
 import com.test.project.http_errors.BadRequestException;
 import com.test.project.http_errors.NotFoundException;
 import com.test.project.repository.IRolRepository;
 import com.test.project.repository.IUserRepository;
 import com.test.project.model.AuthResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -25,6 +31,12 @@ public class UserService {
 
     @Autowired
     private JwtService jwtService;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    public UserService() {
+    }
 
     public String login(LoginUserDTO login) {
 
@@ -42,12 +54,13 @@ public class UserService {
 
     public AuthResponse Register(UserCreateDTO register) {
         if(userRepository.existsByEmail(register.getEmail())) {
-            new BadRequestException("email in use, try with another email");
+            throw new BadRequestException("email in use, try with another email");
         }
-        Set<Rol> userRoles =  rolRepository.findByName(register.getRoles());
+
+        Set<Rol> userRoles = rolRepository.findByNameIn(register.getRoles());
         User user = User.builder()
                 .email(register.getEmail())
-                .password(register.getPassword())
+                .password(passwordEncoder.encode(register.getPassword()))
                 .name(register.getName())
                 .address(register.getAddress())
                 .roles(userRoles)
@@ -60,6 +73,15 @@ public class UserService {
                 .build();
     }
 
+/*
+
+    public User registerUser(User user,  Set<RolName> role) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Rol userRole = (Rol) rolRepository.findByName(role);
+        user.setRoles(Collections.singleton(userRole));
+        return userRepository.save(user);
+    }
+*/
     /*
     public Optional<User> getByEmail(String email){
         return userRepository.findByEmail(email);

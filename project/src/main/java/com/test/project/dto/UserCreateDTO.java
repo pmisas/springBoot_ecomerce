@@ -31,5 +31,5 @@ public class UserCreateDTO {
     @NotBlank
     @Size(min = 8, max=20)
     String address;
-    RolName roles;
+    List<RolName> roles;
 }

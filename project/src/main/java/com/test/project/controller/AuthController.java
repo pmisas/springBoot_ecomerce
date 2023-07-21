@@ -2,6 +2,8 @@ package com.test.project.controller;
 
 import com.test.project.dto.LoginUserDTO;
 import com.test.project.dto.UserCreateDTO;
+import com.test.project.entity.User;
+import com.test.project.enums.RolName;
 import com.test.project.model.ApiResponse;
 //import com.test.project.security.jwt.JwtProvider;
 import com.test.project.security.service.UserService;
@@ -30,6 +32,7 @@ public class AuthController {
         return response;
     }
 
+
     @PostMapping("/register")
     public ApiResponse register (@RequestBody UserCreateDTO register){
 
@@ -39,6 +42,14 @@ public class AuthController {
         response.setData(userService.Register(register));
         return response;
     }
+
+/*
+    @PostMapping("/register")
+    public User register(@RequestBody User user, @RequestParam Set<RolName> roles) {
+        return userService.registerUser(user, roles);
+    }
+
+ */
 
     /*
     @Autowired

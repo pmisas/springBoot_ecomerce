@@ -33,11 +33,13 @@ public class User implements UserDetails {
     String password;
     String address;
 
-    @ManyToMany
-    @JoinTable(name = "user_rol",
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns =  @JoinColumn(name = "rol_id"))
-    Set<Rol> roles = new HashSet<>();
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Rol> roles = new HashSet<>();
 
 
     @JsonIgnoreProperties("seller")
