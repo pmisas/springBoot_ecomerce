@@ -6,6 +6,7 @@ import com.test.project.entity.User;
 import com.test.project.model.ApiResponse;
 import com.test.project.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class ItemController {
     ItemService itemService;
 
     @PostMapping("/{idUser}")
+    @PreAuthorize("BUYER")
     public ApiResponse addItem(@PathVariable Long idUser, @RequestBody ItemDTO item) {
         Item data = itemService.saveItem(idUser, item);
         ApiResponse response = new ApiResponse();
@@ -28,7 +30,7 @@ public class ItemController {
         return response;
     }
 
-    @GetMapping
+    @GetMapping("/public/all")
     public ApiResponse getItems() {
         List<Item> data = itemService.getItems();
         ApiResponse response = new ApiResponse();
@@ -38,7 +40,7 @@ public class ItemController {
         return response;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/public/{id}")
     public ApiResponse getItemById(@PathVariable Long id) {
 
         Item data = itemService.getItemById(id);
@@ -50,6 +52,7 @@ public class ItemController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("BUYER")
     public ApiResponse updateItem(@PathVariable Long id, @RequestBody ItemDTO item) {
         Item data = itemService.updateItem(id, item);
         ApiResponse response = new ApiResponse();
