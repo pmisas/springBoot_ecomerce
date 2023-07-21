@@ -2,8 +2,8 @@ package com.test.project.security.service;
 
 import com.test.project.entity.Rol;
 import com.test.project.entity.User;
-import com.test.project.security.dto.LoginUserDTO;
-import com.test.project.security.dto.UserCreateDTO;
+import com.test.project.dto.LoginUserDTO;
+import com.test.project.dto.UserCreateDTO;
 import com.test.project.http_errors.BadRequestException;
 import com.test.project.http_errors.NotFoundException;
 import com.test.project.repository.IRolRepository;
@@ -27,12 +27,17 @@ public class UserService {
     private JwtService jwtService;
 
     public String login(LoginUserDTO login) {
+
+        /*
         User user = userRepository.findByEmail(login.getEmail())
                 .orElseThrow(()-> new NotFoundException("user with email"+ login.getEmail() +"not found"));
         if(user.getPassword() != login.getPassword()) {
             new BadRequestException("wrong password");
         }
         return "login from public endpoint";
+
+         */
+        return "holi";
     }
 
     public AuthResponse Register(UserCreateDTO register) {

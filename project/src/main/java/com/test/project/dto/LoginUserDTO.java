@@ -1,4 +1,4 @@
-package com.test.project.security.dto;
+package com.test.project.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

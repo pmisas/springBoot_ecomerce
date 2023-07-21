@@ -1,4 +1,4 @@
-package com.test.project.security.dto;
+package com.test.project.dto;
 
 import com.test.project.entity.Rol;
 import com.test.project.enums.RolName;

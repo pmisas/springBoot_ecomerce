@@ -1,7 +1,7 @@
-package com.test.project.security.controller;
+package com.test.project.controller;
 
-import com.test.project.security.dto.LoginUserDTO;
-import com.test.project.security.dto.UserCreateDTO;
+import com.test.project.dto.LoginUserDTO;
+import com.test.project.dto.UserCreateDTO;
 import com.test.project.model.ApiResponse;
 //import com.test.project.security.jwt.JwtProvider;
 import com.test.project.security.service.UserService;
