@@ -33,6 +33,7 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(authRequest -> authRequest
+                        .requestMatchers("/seller/**").hasAnyAuthority("SELLER")
                         .requestMatchers("/auth/**","/public/**").permitAll()
                         .anyRequest().authenticated()
                     )

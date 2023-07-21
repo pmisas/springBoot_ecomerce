@@ -13,14 +13,13 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/items")
+@RequestMapping
 public class ItemController {
 
     @Autowired
     ItemService itemService;
 
-    @PostMapping("/{idUser}")
-    @PreAuthorize("BUYER")
+    @PostMapping("/seller/items/{idUser}")
     public ApiResponse addItem(@PathVariable Long idUser, @RequestBody ItemDTO item) {
         Item data = itemService.saveItem(idUser, item);
         ApiResponse response = new ApiResponse();
@@ -30,7 +29,7 @@ public class ItemController {
         return response;
     }
 
-    @GetMapping("/public/all")
+    @GetMapping("/public/items")
     public ApiResponse getItems() {
         List<Item> data = itemService.getItems();
         ApiResponse response = new ApiResponse();
@@ -40,7 +39,7 @@ public class ItemController {
         return response;
     }
 
-    @GetMapping("/public/{id}")
+    @GetMapping("/public/items/{id}")
     public ApiResponse getItemById(@PathVariable Long id) {
 
         Item data = itemService.getItemById(id);
@@ -51,8 +50,7 @@ public class ItemController {
         return response;
     }
 
-    @PutMapping("/{id}")
-    @PreAuthorize("BUYER")
+    @PutMapping("/seller/items/{id}")
     public ApiResponse updateItem(@PathVariable Long id, @RequestBody ItemDTO item) {
         Item data = itemService.updateItem(id, item);
         ApiResponse response = new ApiResponse();
@@ -62,7 +60,7 @@ public class ItemController {
         return response;
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/seller/items/{id}")
     public ApiResponse deleteItemById(@PathVariable Long id) {
         String data = itemService.deleteItemById(id);
         ApiResponse response = new ApiResponse();

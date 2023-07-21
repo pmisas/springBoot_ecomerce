@@ -12,10 +12,7 @@ import org.springframework.stereotype.Service;
 import io.jsonwebtoken.Jwts;
 import org.springframework.util.StringUtils;
 
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,11 +42,19 @@ public class JwtService {
                 .compact();
     }
 
+    /*
     private String getRolesFromUser(UserDetails user) {
         Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
         return authorities.stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
+    }*/
+
+    private List<String> getRolesFromUser(UserDetails user) {
+        Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
+        return authorities.stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
     }
 
     public String getEmailFromToken(String token) {

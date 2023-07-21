@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping
 public class OrderController {
 
     @Autowired
     OrderService orderService;
 
-    @PostMapping("/{idSeller}")
+    @PostMapping("/public/orders/{idSeller}")
     public ApiResponse addOrder(@PathVariable Long idSeller, @RequestBody OrderDTO order) {
         Order data = orderService.saveOrder(idSeller, order);
         ApiResponse response = new ApiResponse();
@@ -29,7 +29,7 @@ public class OrderController {
         return response;
     }
 
-    @GetMapping("/{idSeller}/seller")
+    @GetMapping("/seller/orders/{idSeller}")
     public ApiResponse getOrders(@PathVariable Long idSeller) {
         List<Order> data = orderService.getOrders(idSeller);
         ApiResponse response = new ApiResponse();
@@ -39,7 +39,7 @@ public class OrderController {
         return response;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/seller/orders/{id}")
     public ApiResponse getOrderById(@PathVariable Long id) {
         Order data = orderService.getOrderById(id);
         ApiResponse response = new ApiResponse();
@@ -49,12 +49,12 @@ public class OrderController {
         return response;
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/seller/orders/{id}")
     public void updateOrder(@PathVariable Long id,@RequestBody OrderDTO order) {
         orderService.updateOrder(id, order);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/seller/orders/{id}")
     public ApiResponse deleteOrderById(@PathVariable Long id) {
 
         String data = orderService.deleteOrderById(id);
