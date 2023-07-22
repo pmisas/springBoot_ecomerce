@@ -1,5 +1,6 @@
 package com.test.project.service;
 
+import com.test.project.dto.SellerDTO;
 import com.test.project.dto.item.ItemDTO;
 import com.test.project.entity.Category;
 import com.test.project.entity.Item;
@@ -52,6 +53,7 @@ public class ItemService {
     }
 
     public List<Item> getItems() {
+        List<Item> item = itemRepository.findAll();
         return itemRepository.findAll();
     }
 
