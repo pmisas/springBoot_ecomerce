@@ -24,12 +24,13 @@ public class Item {
     private Long id;
     private String name;
     private String image;
-    private Integer price;
+    private String price;
     private Integer stock;
     private String description;
 
 
     @ManyToOne
+    @JsonBackReference
     @JsonIgnoreProperties("items")
     @JoinColumn(name = "seller_id")
     private User seller;
@@ -41,6 +42,7 @@ public class Item {
      */
 
     @ManyToMany
+    @JsonBackReference
     @JoinTable(
             name = "category_item",
             joinColumns = @JoinColumn(name = "item_id"),

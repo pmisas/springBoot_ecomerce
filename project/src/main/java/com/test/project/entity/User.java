@@ -44,7 +44,6 @@ public class User implements UserDetails {
 
 
     @JsonIgnoreProperties("seller")
-    /*@JsonBackReference*/
     @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL)
     private List<Item> items = new ArrayList<>();
 

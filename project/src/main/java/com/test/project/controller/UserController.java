@@ -1,6 +1,14 @@
 package com.test.project.controller;
 
+import com.google.protobuf.Api;
+import com.test.project.entity.User;
+import com.test.project.http_errors.NotFoundException;
+import com.test.project.model.ApiResponse;
+import com.test.project.security.filter.JwtFilter;
+import com.test.project.security.service.JwtService;
 import com.test.project.security.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,60 +16,29 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserController {
 
+    private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
+
     @Autowired
     private UserService userService;
 
-    /*
-    @PostMapping
-    public ApiResponse addUser(@RequestBody User user) {
-        User data = userService.saveUser(user);
-        ApiResponse response = new ApiResponse();
-        response.setError(false);
-        response.setMessage("");
-        response.setData(data);
-        return response;
-    }
+    @Autowired
+    private JwtService jwtService;
 
     @GetMapping
-    public ApiResponse getUsers() {
-        List<User> data = this.userService.getUsers();
+    public ApiResponse getUserInfo(@RequestHeader("Authorization") String tokenHeader) {
+
+        //String token = tokenHeader.replace("Bearer ", ""); // Remover la palabra "Bearer " del token
+
+        //String data = jwtService.getEmailFromToken(token);
+
+        //User user = userService.getByEmail(data).orElseThrow(()-> new NotFoundException("No se encontró el user"));
+        logger.info("TOKEN : "+ tokenHeader);
+
         ApiResponse response = new ApiResponse();
         response.setError(false);
         response.setMessage("");
-        response.setData(data);
+        response.setData("holi");
         return response;
     }
-
-    @GetMapping("/{id}")
-    public ApiResponse getUserById(@PathVariable Long id) {
-        User data = userService.getUserById(id);
-        ApiResponse response = new ApiResponse();
-        response.setError(false);
-        response.setMessage("");
-        response.setData(data);
-        return response;
-    }
-
-    @PutMapping
-    public ApiResponse updateUserAddress(@RequestBody User user) {
-        User data = userService.updateUser(user);
-        ApiResponse response = new ApiResponse();
-        response.setError(false);
-        response.setMessage("");
-        response.setData(data);
-        return response;
-    }
-
-    @DeleteMapping("/{id}")
-    public ApiResponse deleteUserById(@PathVariable Long id) {
-        String data = userService.deleteUserById(id);
-        ApiResponse response = new ApiResponse();
-        response.setError(false);
-        response.setMessage("");
-        response.setData(data);
-        return response;
-    }
-
-     */
 
 }

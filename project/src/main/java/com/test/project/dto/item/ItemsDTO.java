@@ -17,11 +17,12 @@ public class ItemsDTO {
     private Long id;
     private String name;
     private String image;
-    private Integer price;
+    private String price;
     private Integer stock;
     private String description;
     private SellerDTO seller;
     private List<Category> categories;
+
 
     public static ItemsDTO fromItem(Item item) {
         ItemsDTO itemsDTO = new ItemsDTO();

@@ -44,13 +44,18 @@ public class UserService {
 
 
     public AuthResponse login(LoginUserDTO request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
-        UserDetails user=userRepository.findByEmail(request.getEmail()).orElseThrow();
-        String token=jwtService.getToken(user);
-        return AuthResponse.builder()
-                .token(token)
-                .build();
+        UserDetails user=userRepository.findByEmail(request.getEmail()).orElseThrow(()-> new NotFoundException("Email no encontrado"));
 
+        if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+            String token=jwtService.getToken(user);
+            return AuthResponse.builder()
+                    .token(token)
+                    .build();
+        } else {
+            throw new BadRequestException("Contraseña incorrecta");
+        }
     }
 
     public AuthResponse Register(UserCreateDTO register) {
@@ -72,6 +77,10 @@ public class UserService {
         return AuthResponse.builder()
                 .token(jwtService.getToken(user))
                 .build();
+    }
+
+    public Optional<User> getByEmail(String email){
+        return userRepository.findByEmail(email);
     }
 
 /*

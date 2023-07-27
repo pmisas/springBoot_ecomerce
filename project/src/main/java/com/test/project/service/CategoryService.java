@@ -1,12 +1,11 @@
 package com.test.project.service;
 
+import com.test.project.dto.categories.SendCategoryDTO;
 import com.test.project.entity.Category;
-import com.test.project.entity.Item;
 import com.test.project.repository.ICategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -19,11 +18,20 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
-    public List<Category> getCategory() {
-        return categoryRepository.findAll();
+    public SendCategoryDTO getCategory() {
+        SendCategoryDTO sendCategoryDTO = new SendCategoryDTO();
+        sendCategoryDTO.setHome(getCategoryById(1L));
+        sendCategoryDTO.setElectronic(getCategoryById(2L));
+        sendCategoryDTO.setBeauty(getCategoryById(3L));
+        sendCategoryDTO.setHealth(getCategoryById(4L));
+        sendCategoryDTO.setKids(getCategoryById(5L));
+        sendCategoryDTO.setTransport(getCategoryById(6L));
+        sendCategoryDTO.setEntertainment(getCategoryById(7L));
+        return sendCategoryDTO;
     }
 
     public Category getCategoryById(Long id) {
+
         return categoryRepository.findById(id).orElse(null);
     }
 

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class AuthController {
 
-    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+        private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     @Autowired
     UserService userService;

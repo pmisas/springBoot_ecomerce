@@ -11,7 +11,7 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("*") // Permitir todas las solicitudes desde cualquier origen (puedes especificar dominios permitidos aquí)
-                .allowedMethods("GET", "POST", "PUT", "DELETE") // Permitir los métodos HTTP que desees
+                .allowedMethods("*") // Permitir los métodos HTTP que desees
                 .allowedHeaders("*"); // Permitir todas las cabeceras
     }
 }

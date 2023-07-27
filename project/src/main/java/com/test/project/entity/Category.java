@@ -21,7 +21,6 @@ public class Category {
     private String name;
 
     @ManyToMany(mappedBy = "categories")
-    @JsonBackReference
     private List<Item> items;
 
     public Category(String name) {

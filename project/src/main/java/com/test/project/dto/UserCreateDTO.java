@@ -26,10 +26,8 @@ public class UserCreateDTO {
     @Email
     String email;
     @NotBlank
-    @Size(min = 3, max=8)
     String password;
     @NotBlank
-    @Size(min = 8, max=20)
     String address;
     List<RolName> roles;
 }
